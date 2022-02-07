@@ -6,11 +6,22 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        List {
+            NestedView(
+                store: Store(
+                    initialState: .mock,
+                    reducer: nestedReducer,
+                    environment: NestedEnvironment(
+                        uuid: UUID.init
+                    )
+                )
+            )
+        }
+        .listStyle(SidebarListStyle())
     }
 }
 
